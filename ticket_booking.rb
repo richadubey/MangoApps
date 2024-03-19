@@ -1,5 +1,3 @@
-require 'pry'
-
 class Movie
   attr_reader :title, :show_timings, :available_seats
 
@@ -12,7 +10,6 @@ class Movie
   end
 
   def book_ticket(show_time, full_name)
-    binding.pry
     if @show_timings.include?(show_time) && available_seats[show_time].any?
       seat_number = available_seats[show_time].shift
       @booked_seats[show_time] << { seat_number: seat_number, full_name: full_name }
@@ -41,7 +38,6 @@ class Movie
 
   def display_showtimes_and_availability
     puts "Showtimes for #{title}:"
-    binding.pry
     @show_timings.each_with_index { |show_time, index| puts "#{index + 1}. #{show_time}: #{available_seats[show_time].length} seats available" }
   end
 end
@@ -72,7 +68,6 @@ class BookingSystem
 
   def book_ticket(movie_index, show_index, full_name)
     movie = @movies[movie_index]
-    binding.pry
     if movie
       show_time = movie.show_timings[show_index]
       puts movie.book_ticket(show_time, full_name)
